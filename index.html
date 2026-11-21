@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Mall Mayhem</title>
+<style>
+  :root { --pink:#ff4f9a; --yellow:#ffd23f; --blue:#3fa7ff; --ink:#1b1340; }
+  html,body { margin:0; height:100%; overflow:hidden; background:#1b1340; font-family:"Trebuchet MS",system-ui,sans-serif; color:#fff; }
+  canvas { display:block; }
+  #overlay { position:fixed; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    background:radial-gradient(circle at 50% 30%, rgba(255,79,154,.55), rgba(27,19,64,.92) 60%); z-index:10; text-align:center; padding:16px; }
+  #overlay h1 { font-size:clamp(44px,9vw,96px); margin:0; letter-spacing:2px; color:var(--yellow);
+    text-shadow:0 6px 0 #c2185b, 0 12px 24px rgba(0,0,0,.5); transform:rotate(-3deg); }
+  #overlay p { max-width:560px; opacity:.9; line-height:1.4; }
+  .btn { font:inherit; font-weight:bold; font-size:22px; border:none; border-radius:16px; padding:16px 28px; margin:8px; cursor:pointer;
+    color:var(--ink); background:var(--yellow); box-shadow:0 6px 0 #b8901a; min-width:260px; }
+  .btn.alt { background:var(--blue); color:#fff; box-shadow:0 6px 0 #1f6fb3; }
+  .btn:active { transform:translateY(4px); box-shadow:0 2px 0 #b8901a; }
+  .btn:disabled { opacity:.45; cursor:not-allowed; }
+  #status { margin-top:10px; font-size:14px; opacity:.8; min-height:18px; }
+  #hud { position:fixed; left:12px; top:12px; z-index:5; font-size:14px; background:rgba(0,0,0,.45); padding:8px 12px; border-radius:10px; display:none; line-height:1.5; }
+  #crosshair { position:fixed; left:50%; top:50%; width:10px; height:10px; margin:-5px; border-radius:50%; border:2px solid #fff; z-index:5; display:none; mix-blend-mode:difference; }
+  #toast { position:fixed; left:50%; bottom:40px; transform:translateX(-50%); z-index:6; background:rgba(27,19,64,.9); border:2px solid var(--yellow);
+    padding:10px 18px; border-radius:12px; font-weight:bold; display:none; }
+  .keys { font-size:13px; opacity:.75; margin-top:14px; }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/",
+  "cannon-es": "https://cdn.jsdelivr.net/npm/cannon-es@0.20.0/dist/cannon-es.js"
+} }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js"></script>
+</head>
+<body>
+<div id="overlay">
+  <h1>MALL MAYHEM</h1>
+  <p>Grab carts, throw watermelons, work terrible jobs, and cause chaos with up to 8 friends.</p>
+  <button class="btn" id="btnVR" disabled>CHECKING VR…</button>
+  <button class="btn alt" id="btnDesk">PLAY ON DESKTOP</button>
+  <div id="status">Loading mall…</div>
+  <div class="keys">Desktop: WASD move · Mouse look · Left click grab/throw (empty air = punch) · F punch · Right click fire/throw/press · E use/spray · Scroll hold distance · Tab wrist menu · Esc release mouse</div>
+</div>
+<div id="hud"></div>
+<div id="crosshair"></div>
+<div id="toast"></div>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
